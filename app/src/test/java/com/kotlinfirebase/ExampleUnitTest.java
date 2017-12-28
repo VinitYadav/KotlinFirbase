@@ -1,4 +1,4 @@
-package com.kotlinfirbase;
+package com.kotlinfirebase;
 
 import org.junit.Test;
 

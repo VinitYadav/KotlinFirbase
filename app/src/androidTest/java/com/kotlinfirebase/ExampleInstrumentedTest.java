@@ -1,4 +1,4 @@
-package com.kotlinfirbase;
+package com.kotlinfirebase;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
