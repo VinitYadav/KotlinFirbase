@@ -3,13 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@drawable/login_background"
     tools:context="com.kotlinfirebase.SplashActivity">
 
     <ImageView
         android:id="@+id/imageViewLogo"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_centerInParent="true"
         android:src="@drawable/kotlin_logo" />
 

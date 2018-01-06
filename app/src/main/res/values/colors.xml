@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#ff6347</color>
-    <color name="colorPrimaryDark">#ff2600</color>
+    <color name="colorPrimary">#5a06bf</color>
+    <color name="colorPrimaryDark">#4a148c</color>
     <color name="colorAccent">#ffffff</color>
     <color name="white">#ffffff</color>
+    <color name="black_trans_one">#36000000</color>
+    <color name="white_trans_one">#4bf2ebeb</color>
+    <color name="pink">#f42bc2</color>
+    <color name="colorPrimaryLight">#b06eff</color>
+    <color name="pink_light">#fa5ad2</color>
+    <color name="trans_one">#0e000000</color>
 </resources>

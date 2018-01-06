@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">KotlinFirbase</string>
+
+
+    <!--Login screen-->
+    <string name="login_heading_name">Kotlin With Firebase</string>
+    <string name="login_hint_enter_email">Email</string>
+    <string name="login_hint_enter_password">Password</string>
+    <string name="login_button_text">Login</string>
+    <!--Login screen-->
+
+    <!--Signup screen-->
+    <string name="signup_heading_name">Create Account</string>
+    <string name="signup_button_text">Create Account</string>
+    <string name="signup_hint_full_name">Full name</string>
+    <string name="signup_hint_email">Email</string>
+    <string name="signup_hint_password">Password</string>
+    <string name="signup_hint_confirm_password">Confirm password</string>
+    <!--Signup screen-->
 </resources>
