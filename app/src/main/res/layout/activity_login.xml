@@ -5,7 +5,11 @@
 
         <variable
             name="activity"
-            type="com.kotlinfirebase.LoginActivity" />
+            type="com.kotlinfirebase.activity.LoginActivity" />
+
+        <variable
+            name="loginModel"
+            type="com.kotlinfirebase.model.LoginModel" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -15,18 +19,37 @@
         android:layout_height="match_parent"
         android:background="@drawable/login_background"
         android:orientation="vertical"
-        tools:context="com.kotlinfirebase.LoginActivity">
+        tools:context="com.kotlinfirebase.activity.LoginActivity">
 
         <View
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1" />
 
-        <ImageView
-            android:layout_width="90dp"
-            android:layout_height="90dp"
-            android:layout_gravity="center"
-            android:src="@drawable/kotlin_logo" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_gravity="center"
+                android:src="@drawable/kotlin_logo" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/plus_icon" />
+
+            <ImageView
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_gravity="center"
+                android:src="@drawable/firebase_logo" />
+        </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
@@ -56,6 +79,7 @@
             android:inputType="textEmailAddress"
             android:lines="1"
             android:padding="12dp"
+            android:text="@={loginModel.email}"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:textSize="14dp" />
@@ -74,6 +98,7 @@
             android:inputType="textPassword"
             android:lines="1"
             android:padding="12dp"
+            android:text="@={loginModel.password}"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:textSize="14dp" />
@@ -90,6 +115,7 @@
             android:layout_gravity="center"
             android:layout_marginEnd="20dp"
             android:layout_marginStart="20dp"
+            android:onClick="@{()->activity.onClickLogin()}"
             android:text="@string/login_button_text"
             android:textColor="@color/white"
             android:textSize="16dp" />

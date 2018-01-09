@@ -7,6 +7,10 @@
     <string name="login_hint_enter_email">Email</string>
     <string name="login_hint_enter_password">Password</string>
     <string name="login_button_text">Login</string>
+    <string name="login_email_validation">Please enter email</string>
+    <string name="login_password_validation">Please enter password</string>
+    <string name="login_error">Login error</string>
+    <string name="login_successfully">Login successfully</string>
     <!--Login screen-->
 
     <!--Signup screen-->
@@ -16,5 +20,17 @@
     <string name="signup_hint_email">Email</string>
     <string name="signup_hint_password">Password</string>
     <string name="signup_hint_confirm_password">Confirm password</string>
+
+    <string name="signup_name_validation">Please enter name</string>
+    <string name="signup_email_validation">Please enter email</string>
+    <string name="signup_password_validation">Please enter password</string>
+    <string name="signup_confirm_password_validation">Confirm password does not match</string>
+    <string name="signup_email_format_validation">Please enter valid email</string>
+    <string name="signup_error">Signup error</string>
+    <string name="signup_successfully">Account created successfully</string>
     <!--Signup screen-->
+
+    <!--Success message-->
+
+    <!--Success message-->
 </resources>
