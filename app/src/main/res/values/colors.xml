@@ -10,4 +10,6 @@
     <color name="colorPrimaryLight">#b06eff</color>
     <color name="pink_light">#fa5ad2</color>
     <color name="trans_one">#0e000000</color>
+    <color name="text_light">#a3a3a3</color>
+    <color name="text_dark">#3b3a3a</color>
 </resources>

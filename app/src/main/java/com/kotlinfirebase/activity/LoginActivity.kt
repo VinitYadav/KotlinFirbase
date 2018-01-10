@@ -62,7 +62,9 @@ class LoginActivity : AppCompatActivity() {
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
         if (auth.currentUser != null) {
-            Constant.showToast(this@LoginActivity, "Login")
+            var intent = Intent(this@LoginActivity, DashboardActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 
