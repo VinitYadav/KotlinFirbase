@@ -40,31 +40,17 @@ class LoginActivity : AppCompatActivity() {
      */
     fun onClickLogin() {
         if (validation()) {
-            progressHelper.show()
-            auth.signInWithEmailAndPassword(mBinding.loginModel.email, mBinding.loginModel.password)
-                    .addOnCompleteListener(this@LoginActivity) { task ->
-                        progressHelper.dismiss()
-                        if (!task.isSuccessful) {
-                            // there was an error
-                            Constant.showToast(this@LoginActivity, getString(R.string.login_error))
-                        } else {
-                            Constant.showToast(this@LoginActivity, getString(R.string.login_successfully))
-                            /*val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                            startActivity(intent)
-                            finish()*/
-                        }
-                    }
+            loginUser()
         }
     }
 
     private fun init() {
+        Constant.getDeviceWidthHeight(this@LoginActivity)
         progressHelper = ProgressHelper(this@LoginActivity)
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
         if (auth.currentUser != null) {
-            var intent = Intent(this@LoginActivity, DashboardActivity::class.java)
-            startActivity(intent)
-            finish()
+            openDashBoardScreen()
         }
     }
 
@@ -80,5 +66,31 @@ class LoginActivity : AppCompatActivity() {
             return false
         }
         return true
+    }
+
+    /**
+     * Login user
+     */
+    private fun loginUser() {
+        progressHelper.show()
+        auth.signInWithEmailAndPassword(mBinding.loginModel.email, mBinding.loginModel.password)
+                .addOnCompleteListener(this@LoginActivity) { task ->
+                    progressHelper.dismiss()
+                    if (!task.isSuccessful) {
+                        Constant.showToast(this@LoginActivity, getString(R.string.login_error))
+                    } else {
+                        Constant.showToast(this@LoginActivity, getString(R.string.login_successfully))
+                        openDashBoardScreen()
+                    }
+                }
+    }
+
+    /**
+     * Open dash board screen
+     */
+    private fun openDashBoardScreen() {
+        val intent = Intent(this@LoginActivity, DashboardActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }

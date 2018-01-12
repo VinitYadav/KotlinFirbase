@@ -14,16 +14,60 @@
         android:layout_height="match_parent"
         tools:context="com.kotlinfirebase.activity.DashboardActivity">
 
+        <LinearLayout
+            android:id="@+id/linearLayoutHeader"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/login_background"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:onClick="@{()->activity.onClickProfile()}"
+                android:padding="10dp"
+                android:src="@drawable/profile_icon" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:ellipsize="start"
+                android:lines="1"
+                android:text="Name"
+                android:textColor="@color/white"
+                android:textSize="14dp"
+                android:textStyle="italic" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="10dp"
+                android:src="@drawable/plus_small_icon" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="10dp"
+                android:src="@drawable/people_icon" />
+        </LinearLayout>
+
         <ProgressBar
             android:id="@+id/progressBar"
             style="@android:style/Widget.ProgressBar.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true" />
+            android:layout_centerInParent="true"
+            android:visibility="gone" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linearLayoutHeader" />
     </RelativeLayout>
 </layout>

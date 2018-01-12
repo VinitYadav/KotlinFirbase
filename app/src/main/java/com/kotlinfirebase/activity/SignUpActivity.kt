@@ -1,10 +1,10 @@
 package com.kotlinfirebase.activity
 
+import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v4.app.FragmentActivity
-import android.util.Log
+import com.google.android.gms.internal.pr
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.kotlinfirebase.R
@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
+import com.kotlinfirebase.utility.Pref
 import java.io.IOException
 
 
@@ -30,7 +31,7 @@ class SignUpActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_sign_up)
         mBinding.activity = this
-        mBinding.signUpModel = SignUpModel("Amit", "", "amit@gmail.com", "qwerty", "qwerty", Constant.DEFAULT_USER)
+        mBinding.signUpModel = SignUpModel("", "", "", "", "", Constant.DEFAULT_USER)
         init()
     }
 
@@ -39,23 +40,7 @@ class SignUpActivity : AppCompatActivity() {
      */
     fun onClickCreateAccount() {
         if (validation()) {
-            try {
-                progressHelper.show()
-                auth.createUserWithEmailAndPassword(mBinding.signUpModel.emailId,
-                        mBinding.signUpModel.password)
-                        .addOnCompleteListener(this@SignUpActivity, OnCompleteListener<AuthResult>
-                        { task ->
-                            if (!task.isSuccessful) {
-                                Constant.showToast(this@SignUpActivity, getString(R.string.signup_error))
-                            } else {
-                                mBinding.signUpModel.userId = task.result.user.uid
-                                Constant.showToast(this@SignUpActivity, getString(R.string.signup_successfully))
-                                addUserDetail()
-                            }
-                        })
-            } catch (e: IOException) {
-                progressHelper.dismiss()
-            }
+            createAccount()
         }
     }
 
@@ -92,26 +77,55 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     /**
+     * Create new user account
+     */
+    private fun createAccount() {
+        try {
+            progressHelper.show()
+            auth.createUserWithEmailAndPassword(mBinding.signUpModel.emailId,
+                    mBinding.signUpModel.password)
+                    .addOnCompleteListener(this@SignUpActivity, OnCompleteListener<AuthResult>
+                    { task ->
+                        if (!task.isSuccessful) {
+                            Constant.showToast(this@SignUpActivity, getString(R.string.signup_error))
+                        } else {
+                            mBinding.signUpModel.userId = task.result.user.uid
+                            addUserDetail()
+                        }
+                    })
+        } catch (e: IOException) {
+            progressHelper.dismiss()
+        }
+    }
+
+    /**
      * Add user detail in firebase
      */
     private fun addUserDetail() {
 
         val mDatabase = FirebaseDatabase.getInstance().getReference(Constant.TABLE_USER)
-        // Creating new user node, which returns the unique userId
-        val userId = mDatabase.push().key
-        mDatabase.child(userId).setValue(mBinding.signUpModel)
+        mDatabase.child(mBinding.signUpModel.userId).setValue(mBinding.signUpModel)
 
-        mDatabase.addValueEventListener(object : ValueEventListener {
+        val dataBaseGetUser = FirebaseDatabase.getInstance().getReference(Constant.TABLE_USER)
+        dataBaseGetUser.child(mBinding.signUpModel.userId)
+
+        dataBaseGetUser.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-
-                val user = dataSnapshot.getValue<SignUpModel>(SignUpModel::class.java)
-
-                Constant.showToast(this@SignUpActivity, user!!.name)
+                progressHelper.dismiss()
+                Constant.showToast(this@SignUpActivity, getString(R.string.signup_successfully))
+                // Save user id in local pref
+                Pref.writeString(this@SignUpActivity, Pref.USER_ID, mBinding.signUpModel.userId)
+                // Open dashboard screen
+                val intent = Intent(this@SignUpActivity, DashboardActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK;
+                startActivity(intent)
+                finish()
             }
 
             override fun onCancelled(error: DatabaseError) {
                 // Failed to read value
-                Constant.showToast(this@SignUpActivity, "Failed to read value.")
+                progressHelper.dismiss()
+                Constant.showToast(this@SignUpActivity, getString(R.string.signup_error))
             }
         })
     }

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 import com.kotlinfirebase.R
+import com.kotlinfirebase.utility.Constant
 
 class SplashActivity : AppCompatActivity() {
 
@@ -12,6 +13,7 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
         openLoginScreen()
+        Constant.getDeviceWidthHeight(this@SplashActivity)
     }
 
     /**

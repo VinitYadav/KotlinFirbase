@@ -6,12 +6,12 @@ import com.google.firebase.database.Exclude
 import com.kotlinfirebase.BR
 
 data class SignUpModel(
-        private var _name: String,
-        private var _userId: String,
-        private var _emailId: String,
-        private var _password: String,
-        private var _confirmPassword: String,
-        private var _userImage: String
+        private var _name: String = "",
+        private var _userId: String = "",
+        private var _emailId: String = "",
+        private var _password: String = "",
+        private var _confirmPassword: String = "",
+        private var _userImage: String = ""
 ) : BaseObservable() {
 
     var name: String
